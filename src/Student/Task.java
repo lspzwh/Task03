@@ -5,7 +5,7 @@ import Util.DBUtil;
 
 import java.sql.*;
 
-public class Test {
+public class Task {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/test1?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String username = "root";
@@ -17,7 +17,7 @@ public class Test {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,username,password);
             stmt = conn.createStatement();
-//            create(stmt);
+            create(stmt);
             Student student=new Student(2,10,80,60);
             change(student);
             find_all(stmt);
@@ -39,7 +39,7 @@ public class Test {
         }
     }
     public static void create(Statement stmt){
-        String sql="CREATE TABLE student1 " +
+        String sql="CREATE TABLE IF NOT EXISTS student1 " +
                 "(id int(10) not NULL, " +
                 " math int(4), " +
                 " english int(4), " +
@@ -47,7 +47,6 @@ public class Test {
                 " PRIMARY KEY ( id ))";
         try {
             stmt.executeUpdate(sql);
-            stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
