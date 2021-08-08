@@ -27,11 +27,10 @@ public class Test {
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         } finally{
-            // 关闭资源
             try{
                 if(stmt!=null) stmt.close();
             }catch(SQLException se2){
-            }// 什么都不做
+            }
             try{
                 if(conn!=null) conn.close();
             }catch(SQLException se){
